@@ -24,21 +24,25 @@ class ViewController: UIViewController {
         
     }
     
+    
+    
     @IBAction func numberButton(_ sender: UIButton) {
         // set number pertama
         if secondNumber == "" && operationSymbol == "" {
-            print("number 1: di set")
+            //            print("number 1: di set")
             firstNumber.append(contentsOf: sender.currentTitle!)
             isActive = 1.0
-            print("First number : \(firstNumber)")
+            //            print("First number : \(firstNumber)")
+            resultLabel.text = self.firstNumber
         }
         
         // set number kedua
         if firstNumber != "" && operationSymbol != ""{
-            print("number 2: di set")
+            //            print("number 2: di set")
             secondNumber.append(contentsOf: sender.currentTitle!)
             isActive = 2.0
-            print("Second number : \(secondNumber)")
+            //            print("Second number : \(secondNumber)")
+            resultLabel.text = self.secondNumber
         }
         
         
@@ -57,11 +61,6 @@ class ViewController: UIViewController {
             print("please type number first")
         }
         
-        // kalo number pertama sudah ke isi, maka symbol bisa di set
-        if firstNumber != "" && sender.currentTitle != "=" && sender.currentTitle != "+/-" && sender.currentTitle != "%" {
-            operationSymbol = sender.currentTitle!
-            print("\(operationSymbol) -> ganti simbol")
-        }
         
         //
         if sender.currentTitle == "+/-"{
@@ -71,7 +70,7 @@ class ViewController: UIViewController {
                 print("fistnumber : \(firstNumber)")
             case 2.0:
                 secondNumber = String(Double(secondNumber)! * -1.0)
-                 print("secondNumber : \(secondNumber)")
+                print("secondNumber : \(secondNumber)")
             default:
                 print("Error when progress plus minus")
             }
@@ -81,42 +80,50 @@ class ViewController: UIViewController {
             switch isActive {
             case 1.0:
                 firstNumber = String(Double(firstNumber)! / 100)
-                 print("fistnumber : \(firstNumber)")
+                print("fistnumber : \(firstNumber)")
             case 2.0:
                 secondNumber = String(Double(secondNumber)! / 100)
-                 print("secondNumber : \(secondNumber)")
+                print("secondNumber : \(secondNumber)")
             default:
                 print("Error when progress persentase")
             }
         }
+        
+        
+        
+        
         
         // kalo first number, scond nummber dan operation smbol tidak kosong jalankan kalkulasi
         if firstNumber != "" && secondNumber != "" && operationSymbol != "" {
             switch operationSymbol {
             case "+":
                 result = Double(firstNumber)! + Double(secondNumber)!
-                print("hasilnya adalah \(result)")
+                //                print("hasilnya adalah \(result)")
+                updateResultLabel(text: String(result))
                 
                 firstNumber = String(result)
                 secondNumber = ""
                 
             case "-":
                 result = Double(firstNumber)! - Double(secondNumber)!
-                print("hasilnya adalah \(result)")
+                //                print("hasilnya adalah \(result)")
+                updateResultLabel(text: String(result))
                 
                 firstNumber = String(result)
                 secondNumber = ""
                 
             case "X":
                 result = Double(firstNumber)! * Double(secondNumber)!
-                print("hasilnya adalah \(result) dari kali X")
+                //                print("hasilnya adalah \(result) dari kali X")
+                updateResultLabel(text: String(result))
                 
                 firstNumber = String(result)
                 secondNumber = ""
                 
             case "/" :
                 result = Double(firstNumber)! / Double(secondNumber)!
-                print("hasilnya adalah \(result) dari pembagaian /")
+                //                print("hasilnya adalah \(result) dari pembagaian /")
+                updateResultLabel(text: String(result))
                 
                 firstNumber = String(result)
                 secondNumber = ""
@@ -128,31 +135,22 @@ class ViewController: UIViewController {
             //            }
         }
         
+        // kalo number pertama sudah ke isi, maka symbol bisa di set
+        if firstNumber != "" && sender.currentTitle != "=" && sender.currentTitle != "+/-" && sender.currentTitle != "%" {
+            operationSymbol = sender.currentTitle!
+            print("\(operationSymbol) -> ganti simbol")
+        }
         
         
-    }
-    
-    func optionSymbol(value: String){
-        
-    }
-    
-    func calculateOperation(number1: Double, number2: Double, operan: String){
         
     }
     
-    func afterCalculate(){
-        
-    }
     
 }
 
 extension ViewController {
-    func clearResult(){
-        
-    }
-    
-    func updateUI(text: String){
-        
+    func updateResultLabel(text: String){
+        resultLabel.text = text
     }
     
     func resetAC(){
@@ -164,11 +162,4 @@ extension ViewController {
         print("Reset All Running.....")
     }
     
-    func continueCalculate(){
-        
-    }
-    
-    func plusMinus(){
-        
-    }
 }
