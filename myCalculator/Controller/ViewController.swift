@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     var result: Double = 0.0
     var isActive: Double = 0.0
     
+    var cm = CalculatorModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,8 +41,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
     @IBAction func symbolButton(_ sender: UIButton) {
         // reset
         if sender.currentTitle == "AC" {
@@ -54,27 +54,19 @@ class ViewController: UIViewController {
         if sender.currentTitle == "+/-"{
             switch isActive {
             case 1.0:
-                firstNumber = String(Double(firstNumber)! * -1.0)
-            //                print("fistnumber : \(firstNumber)")
+                firstNumber = cm.plusMinus(number: firstNumber)
+                updateResultLabel(text: firstNumber)
             case 2.0:
-                secondNumber = String(Double(secondNumber)! * -1.0)
-            //                print("secondNumber : \(secondNumber)")
+                secondNumber = cm.plusMinus(number: secondNumber)
+                updateResultLabel(text: secondNumber)
             default:
                 print("Error when progress plus minus")
             }
         }
         
         if sender.currentTitle == "%" {
-            switch isActive {
-            case 1.0:
-                firstNumber = String(Double(firstNumber)! / 100)
-                print("fistnumber : \(firstNumber)")
-            case 2.0:
-                secondNumber = String(Double(secondNumber)! / 100)
-                print("secondNumber : \(secondNumber)")
-            default:
-                print("Error when progress persentase")
-            }
+            let persen = cm.persentase(isActive: isActive, firstNumber: firstNumber, secondNumber: secondNumber)
+            updateResultLabel(text: persen)
         }
         // kalo first number, scond nummber dan operation smbol tidak kosong jalankan kalkulasi
         if firstNumber != "" && secondNumber != "" && operationSymbol != "" {
@@ -85,7 +77,6 @@ class ViewController: UIViewController {
         // kalo number pertama sudah ke isi, maka symbol bisa di set
         if firstNumber != "" && sender.currentTitle != "=" && sender.currentTitle != "+/-" && sender.currentTitle != "%" {
             operationSymbol = sender.currentTitle!
-            //            sender.currentTitle
             sender.isHighlighted = true
             print("\(operationSymbol) -> ganti simbol")
         }
