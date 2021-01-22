@@ -78,49 +78,8 @@ class ViewController: UIViewController {
         }
         // kalo first number, scond nummber dan operation smbol tidak kosong jalankan kalkulasi
         if firstNumber != "" && secondNumber != "" && operationSymbol != "" {
-            switch operationSymbol {
-            case "+":
-                result = Double(firstNumber)! + Double(secondNumber)!
-                //                print("hasilnya adalah \(result)")
-//                updateResultLabel(text: String(result))
-//
-//                firstNumber = String(result)
-//                secondNumber = ""
-                calculation(result: result, resultLabel: String(result))
-                
-            case "-":
-                result = Double(firstNumber)! - Double(secondNumber)!
-                //                print("hasilnya adalah \(result)")
-//                updateResultLabel(text: String(result))
-//
-//                firstNumber = String(result)
-//                secondNumber = ""
-//                calculation(result: result, resultLabel: String(result))
-                calculation(result: result, resultLabel: String(result))
-                
-            case "X":
-                result = Double(firstNumber)! * Double(secondNumber)!
-                //                print("hasilnya adalah \(result) dari kali X")
-//                updateResultLabel(text: String(result))
-//
-//                firstNumber = String(result)
-//                secondNumber = ""
-                calculation(result: result, resultLabel: String(result))
-                
-            case "/" :
-                result = Double(firstNumber)! / Double(secondNumber)!
-                //                print("hasilnya adalah \(result) dari pembagaian /")
-//                updateResultLabel(text: String(result))
-//
-//                firstNumber = String(result)
-//                secondNumber = ""
-                calculation(result: result, resultLabel: String(result))
-                
-                
-            default:
-                print("default")
-            }
-            //            }
+            let result = checkCalculation(symbol: operationSymbol)
+            calculation(result: result, resultLabel: result)
         }
         
         // kalo number pertama sudah ke isi, maka symbol bisa di set
@@ -130,9 +89,6 @@ class ViewController: UIViewController {
             sender.isHighlighted = true
             print("\(operationSymbol) -> ganti simbol")
         }
-        
-        
-        
     }
     
     
@@ -167,8 +123,23 @@ extension ViewController {
         }
     }
     
-    func calculation(result: Double, resultLabel: String){
-        updateResultLabel(text: resultLabel)
+    func checkCalculation(symbol: String) -> Double {
+        switch symbol {
+        case "+":
+            return (Double(firstNumber)! + Double(secondNumber)!)
+        case "-":
+            return (Double(firstNumber)! - Double(secondNumber)!)
+        case "X":
+            return (Double(firstNumber)! * Double(secondNumber)!)
+        case "/" :
+            return (Double(firstNumber)! / Double(secondNumber)!)
+        default:
+            return 0.0
+        }
+    }
+    
+    func calculation(result: Double, resultLabel: Double){
+        updateResultLabel(text: String(resultLabel))
         self.firstNumber = String(result)
         self.secondNumber = ""
     }
