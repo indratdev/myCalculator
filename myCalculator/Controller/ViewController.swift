@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         
     }
     
@@ -30,23 +30,15 @@ class ViewController: UIViewController {
     @IBAction func numberButton(_ sender: UIButton) {
         // set number pertama
         if secondNumber == "" && operationSymbol == "" {
-            //            print("number 1: di set")
             firstNumber.append(contentsOf: sender.currentTitle!)
-            isActive = 1.0
-            //            print("First number : \(firstNumber)")
-            resultLabel.text = self.firstNumber
+            up(number: 1, isActive: 1.0, label: self.firstNumber)
         }
         
         // set number kedua
         if firstNumber != "" && operationSymbol != ""{
-            //            print("number 2: di set")
             secondNumber.append(contentsOf: sender.currentTitle!)
-            isActive = 2.0
-            //            print("Second number : \(secondNumber)")
-            resultLabel.text = self.secondNumber
+            up(number: 2, isActive: 2.0, label: self.secondNumber)
         }
-        
-        
     }
     
     
@@ -59,7 +51,7 @@ class ViewController: UIViewController {
         
         // validasi harus isi number pertama
         if firstNumber == "" && sender.currentTitle != "AC" {
-            print("please type number first")
+            return
         }
         
         
@@ -139,6 +131,8 @@ class ViewController: UIViewController {
         // kalo number pertama sudah ke isi, maka symbol bisa di set
         if firstNumber != "" && sender.currentTitle != "=" && sender.currentTitle != "+/-" && sender.currentTitle != "%" {
             operationSymbol = sender.currentTitle!
+//            sender.currentTitle
+            sender.isHighlighted = true
             print("\(operationSymbol) -> ganti simbol")
         }
         
@@ -160,7 +154,22 @@ extension ViewController {
         self.operation = false
         self.operationSymbol  = ""
         self.result = 0.0
+        resultLabel.text = "0.0"
         print("Reset All Running.....")
+        
+    }
+    
+    func up(number: Int, isActive: Double, label: String){
+        switch number {
+        case 1:
+            self.isActive = isActive
+            self.resultLabel.text = label
+        case 2:
+            self.isActive = isActive
+            self.resultLabel.text = label
+        default:
+            print("")
+        }
     }
     
 }
