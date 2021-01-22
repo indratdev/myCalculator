@@ -23,10 +23,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        resetAC()
     }
-    
-    
     
     @IBAction func numberButton(_ sender: UIButton) {
         // set number pertama
@@ -51,7 +49,7 @@ class ViewController: UIViewController {
             return
         }
         //
-        if sender.currentTitle == "+/-"{
+        if sender.currentTitle == "+/-" {
             switch isActive {
             case 1.0:
                 firstNumber = cm.plusMinus(number: firstNumber)
@@ -81,8 +79,6 @@ class ViewController: UIViewController {
             print("\(operationSymbol) -> ganti simbol")
         }
     }
-    
-    
 }
 
 extension ViewController {
