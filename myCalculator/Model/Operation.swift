@@ -12,4 +12,9 @@ enum Operation: String {
     case equal = "="
     case plus = "+"
     case minus = "-"
+    case multiple = "X"
+    case divide = "/"
+    case plusMinus = "+/-"
+    case ac = "AC"
+    case persentase = "%"
 }

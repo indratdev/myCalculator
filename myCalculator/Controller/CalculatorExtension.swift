@@ -11,8 +11,7 @@ import UIKit
 
 struct CalculatorExtension {
     let vc = ViewController()
-    
-    
+
     func resetAC(){
         vc.firstNumber = ""
         vc.secondNumber = ""
