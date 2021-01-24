@@ -29,6 +29,7 @@ struct CalculatorModel {
         default:
             print("Error when progress persentase")
         }
+        
         return result
     }
     

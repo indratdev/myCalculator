@@ -20,10 +20,12 @@ class ViewController: UIViewController {
     var isActive: Double = 0.0
     
     var cm = CalculatorModel()
+//    var op: Op
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetAC()
+       
     }
     
     @IBAction func numberButton(_ sender: UIButton) {
@@ -41,15 +43,15 @@ class ViewController: UIViewController {
     
     @IBAction func symbolButton(_ sender: UIButton) {
         // reset
-        if sender.currentTitle == "AC" {
+        if sender.currentTitle == Operation.ac.rawValue {
             resetAC()
         }
         // validasi harus isi number pertama
-        if firstNumber == "" && sender.currentTitle != "AC" {
+        if firstNumber == "" && sender.currentTitle != Operation.ac.rawValue {
             return
         }
         //
-        if sender.currentTitle == "+/-" {
+        if sender.currentTitle == Operation.plusMinus.rawValue {
             switch isActive {
             case 1.0:
                 firstNumber = cm.plusMinus(number: firstNumber)
@@ -62,7 +64,7 @@ class ViewController: UIViewController {
             }
         }
         
-        if sender.currentTitle == "%" {
+        if sender.currentTitle == Operation.persentase.rawValue {
             let persen = cm.persentase(isActive: isActive, firstNumber: firstNumber, secondNumber: secondNumber)
             updateResultLabel(text: persen)
         }
@@ -73,7 +75,7 @@ class ViewController: UIViewController {
         }
         
         // kalo number pertama sudah ke isi, maka symbol bisa di set
-        if firstNumber != "" && sender.currentTitle != "=" && sender.currentTitle != "+/-" && sender.currentTitle != "%" {
+        if firstNumber != "" && sender.currentTitle != Operation.equal.rawValue && sender.currentTitle != Operation.plusMinus.rawValue && sender.currentTitle != Operation.persentase.rawValue {
             operationSymbol = sender.currentTitle!
             sender.isHighlighted = true
             print("\(operationSymbol) -> ganti simbol")
@@ -130,5 +132,6 @@ extension ViewController {
         self.firstNumber = String(result)
         self.secondNumber = ""
     }
+    
     
 }
